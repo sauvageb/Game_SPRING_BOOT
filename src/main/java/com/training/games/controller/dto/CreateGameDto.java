@@ -9,6 +9,11 @@ public class CreateGameDto {
     public CreateGameDto() {
     }
 
+    public CreateGameDto(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
     public String getName() {
         return name;
     }

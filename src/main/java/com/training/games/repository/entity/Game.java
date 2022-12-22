@@ -15,7 +15,7 @@ public class Game {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 1200)
     private String description;
 
     @Column
