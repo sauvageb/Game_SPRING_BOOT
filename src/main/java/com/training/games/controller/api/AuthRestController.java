@@ -30,6 +30,12 @@ public class AuthRestController {
     @Autowired
     private JwtUtils jwtUtils;
 
+    @GetMapping("/signup/already/{username}")
+    public ResponseEntity<?> checkUsernameAlreadyExist(@PathVariable String username) {
+        boolean alreadyExist = userService.checkUsernameAlreadyExist(username);
+        return ResponseEntity.status(HttpStatus.OK).body(alreadyExist);
+    }
+
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@RequestBody SignupRequest dto) {
         try {

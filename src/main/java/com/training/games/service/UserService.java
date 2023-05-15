@@ -11,10 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -30,9 +28,9 @@ public class UserService {
 
         boolean alreadyExist = userRepository.existsByUsername(dto.getUsername());
 
-        if(alreadyExist){
+        if (alreadyExist) {
             throw new UserAlreadyExistException(dto.getUsername());
-        }else {
+        } else {
             User newUser = new User(dto.getUsername(), encoder.encode(dto.getPassword()));
             // Define role
             Role roleUser = roleRepository.findByName(RoleEnum.ROLE_USER);
@@ -41,5 +39,10 @@ public class UserService {
             userRepository.save(newUser);
         }
 
+    }
+
+    public boolean checkUsernameAlreadyExist(String username) {
+        boolean alreadyExist = userRepository.existsByUsername(username);
+        return alreadyExist;
     }
 }
